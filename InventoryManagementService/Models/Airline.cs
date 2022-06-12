@@ -14,7 +14,7 @@ namespace InventoryService.Models
         public string UploadLogo { get; set; }
         public string ContactNumber { get; set; }
         public string ContactAddress { get; set; }
-
+        public bool isBlock { get; set; } = false;
         public virtual ICollection<InventoryTbl> Inventories { get; set; }
     }
 }

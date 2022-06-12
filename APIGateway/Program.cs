@@ -33,7 +33,7 @@ namespace APIGateway
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureAppConfiguration(config => config.AddJsonFile("configuration.json"));
+                    webBuilder.ConfigureAppConfiguration(config => config.AddJsonFile("oceloteConfig.json"));
                 }).ConfigureLogging(logging => logging.AddConsole());
     }
 }

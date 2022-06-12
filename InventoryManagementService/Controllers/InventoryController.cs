@@ -70,22 +70,17 @@ namespace InventoryService.Controllers
           
         }
 
-        [HttpGet("/inventory/search/{fromplace}/{toplace}")]
+        [HttpGet("/inventory/search/{fromplace}/{toplace}/{startDate}/{endDate}")]
         
-        public IActionResult Search(string fromplace, string toplace)
+        public IActionResult Search(string fromplace, string toplace,DateTime startDate,DateTime endDate)
         {
 
             try
             {
-                var flights = _inventoryRepository.GetAllFlightBasedUponPlaces(fromplace, toplace);
-                if (flights.Count == 0)
-                {
-                    return Json(new { data = "No flight exists", isSuccess = true });
-                }
-                else
-                {
+                var flights = _inventoryRepository.GetAllFlightBasedUponPlaces(fromplace, toplace,startDate,endDate);
+              
                     return Json(new { data = flights, isSuccess = true });
-                }
+               
 
             }
             catch (Exception ex)
@@ -95,5 +90,29 @@ namespace InventoryService.Controllers
 
         }
 
+        [HttpDelete]
+        [Route("inventory/deleteAirlineByNo/{airlineNo}")]
+        public IActionResult DeleteAirlineByNo(string airlineNo)
+        {
+
+            try
+            {
+                var inventories = _inventoryRepository.DeleteInventory(airlineNo);
+                if (inventories<0)
+                {
+                    return Json(new { data = "Some err occured while delete inventories", isSuccess = false });
+                }
+                else
+                {
+                    return Json(new { data = "inventory successfully", isSuccess = true });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = ex.Message, isSuccess = true });
+            }
+
+        }
     }
 }

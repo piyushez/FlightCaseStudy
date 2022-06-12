@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirlineService.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20220525134312_AirlineMigrationV_1")]
-    partial class AirlineMigrationV_1
+    [Migration("20220612093452_AirlineMigration")]
+    partial class AirlineMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,11 +28,14 @@ namespace AirlineService.Migrations
                     b.Property<string>("ContactAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContactNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ContactNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("UploadLogo")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isBlock")
+                        .HasColumnType("bit");
 
                     b.HasKey("AirlineNo");
 

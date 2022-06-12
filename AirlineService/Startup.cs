@@ -11,9 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace AirlineService
@@ -39,18 +41,49 @@ namespace AirlineService
 
             services.AddMassTransit(x =>
             {
-               x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
-                {
-                    config.Host(new Uri("rabbitmq://localhost"), h =>
-                    {
-                        h.Username("guest");
-                        h.Password("guest");
-                    });
-                }));
-                
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+                 {
+                     config.Host(new Uri("rabbitmq://localhost"), h =>
+                     {
+                         h.Username("guest");
+                         h.Password("guest");
+                     });
+                 }));
+
+
             });
             services.AddMassTransitHostedService();
-
+            var authenticationProviderKey = "TestKey";
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = authenticationProviderKey;
+            })//JWT Bearer
+                .AddJwtBearer(authenticationProviderKey, o =>
+                {
+                    var key = Encoding.UTF8.GetBytes(Configuration["JWT:Key"]);
+                    o.SaveToken = true;
+                    o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["JWT:Issuer"],
+                        ValidAudience = Configuration["JWT:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(key)
+                    };
+                });
+            //services.AddCors();
+            //services.AddCors(options =>
+            //{
+            //    options.AddDefaultPolicy(
+            //        builder =>
+            //        {
+            //            builder.WithOrigins("http://localhost:3285", "http://localhost:4200")
+            //                                .AllowAnyHeader()
+            //                                .AllowAnyMethod();
+            //        });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,10 +93,18 @@ namespace AirlineService
             {
                 app.UseDeveloperExceptionPage();
             }
-           
-            app.UseRouting();
-           
 
+            app.UseHttpsRedirection();
+            app.UseCors();
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
+            app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

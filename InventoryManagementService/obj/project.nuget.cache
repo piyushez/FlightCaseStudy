@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VXeOsDwSRQRJmLeA55UE0Do4Fs/DGqGiN62yTFkzTrrL0Ydt9WP8BV+UnbGsd40Ro6bG7TRLImE1LcuNC9swxw==",
+  "dgSpecHash": "+BvwPIHAUDiWwgTbcx+SjaNcOaEJ7YB+UXNuFMhWjk5q+z69y0uFr0L0efGwqhChyd4qxay9Kmp0D07vueahJw==",
   "success": true,
-  "projectFilePath": "D:\\Training\\InventoryManagementService\\InventoryService.csproj",
+  "projectFilePath": "D:\\Training\\FlightManagement\\InventoryManagementService\\InventoryService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\automatonymous\\5.1.1\\automatonymous.5.1.1.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\greenpipes\\4.0.0\\greenpipes.4.0.0.nupkg.sha512",
@@ -11,6 +11,7 @@
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\masstransit.aspnetcore\\7.2.0\\masstransit.aspnetcore.7.2.0.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\masstransit.extensions.dependencyinjection\\7.2.0\\masstransit.extensions.dependencyinjection.7.2.0.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\masstransit.rabbitmq\\7.2.0\\masstransit.rabbitmq.7.2.0.nupkg.sha512",
+    "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.25\\microsoft.aspnetcore.authentication.jwtbearer.3.1.25.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

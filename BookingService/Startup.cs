@@ -1,4 +1,4 @@
-using BookingService.DbContexts;
+using BookingService.Models;
 using BookingService.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,9 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BookingService
@@ -29,9 +31,30 @@ namespace BookingService
         {
             services.AddControllers();
             //
-            services.AddTransient<IBookingFlightRepository, BookingFlightRepository>();
-            services.AddDbContextPool<BookingFlightDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("FlightDbConnectionString")));
+            services.AddTransient<IFlightBookRepository, FlightBookRepository>();
+            services.AddDbContextPool<BookingDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("FlightDbConnectionString")));
+            var authenticationProviderKey = "TestKey";
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = authenticationProviderKey;
 
+            }).AddJwtBearer(authenticationProviderKey, o =>
+            {
+
+                var key = Encoding.UTF8.GetBytes("This is my First Authentication JWT");
+                o.SaveToken = true;
+                o.RequireHttpsMetadata = false;
+                o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "http://localhost:58477",
+                    ValidAudience = "http://localhost:58477",
+                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +66,7 @@ namespace BookingService
             }
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

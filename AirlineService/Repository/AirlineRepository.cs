@@ -72,7 +72,8 @@ namespace AirlineService.Repository
                 var data = _appDBContext.Airlines.Find(airlineNo);
                 if (data != null)
                 {
-                    _appDBContext.Airlines.Remove(data);
+                    data.isBlock = true;
+                   
                     res = _appDBContext.SaveChanges();
                 }
                 else

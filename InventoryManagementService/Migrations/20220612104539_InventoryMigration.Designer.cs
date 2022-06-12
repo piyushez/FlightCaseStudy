@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryService.Migrations
 {
     [DbContext(typeof(InventoryDbContext))]
-    [Migration("20220602095612_InventoryServiceV1")]
-    partial class InventoryServiceV1
+    [Migration("20220612104539_InventoryMigration")]
+    partial class InventoryMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace InventoryService.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Common.Models.InventoryTbl", b =>
+            modelBuilder.Entity("InventoryService.Models.InventoryTbl", b =>
                 {
                     b.Property<string>("FlightNumber")
                         .HasColumnType("nvarchar(450)");
@@ -61,6 +61,9 @@ namespace InventoryService.Migrations
 
                     b.Property<string>("ToPlace")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("isBlock")
+                        .HasColumnType("int");
 
                     b.HasKey("FlightNumber");
 

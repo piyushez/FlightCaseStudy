@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Training\\BookingService\\BookingService.csproj": {}
+    "D:\\Training\\FlightManagement\\BookingService\\BookingService.csproj": {}
   },
   "projects": {
-    "D:\\Training\\BookingService\\BookingService.csproj": {
+    "D:\\Training\\FlightManagement\\BookingService\\BookingService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Training\\BookingService\\BookingService.csproj",
+        "projectUniqueName": "D:\\Training\\FlightManagement\\BookingService\\BookingService.csproj",
         "projectName": "BookingService",
-        "projectPath": "D:\\Training\\BookingService\\BookingService.csproj",
+        "projectPath": "D:\\Training\\FlightManagement\\BookingService\\BookingService.csproj",
         "packagesPath": "C:\\Users\\cogdotnet45\\.nuget\\packages\\",
-        "outputPath": "D:\\Training\\BookingService\\obj\\",
+        "outputPath": "D:\\Training\\FlightManagement\\BookingService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -46,6 +46,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.25, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.17, )"

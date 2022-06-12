@@ -91,12 +91,51 @@ namespace InventoryService.Repository
             }
         }
        
-
-        public List<InventoryTbl> GetAllFlightBasedUponPlaces(string fromplace, string toplace)
+        public int DeleteInventory(string AirlineNo)
         {
             try
             {
-                var res = _inventoryContext.InventoryTbl.Where(x => x.ToPlace.ToLower() == toplace.ToLower() && x.FromPlace.ToLower() == fromplace.ToLower()).ToList();
+                var res = true;
+                var inventoriesData = _inventoryContext.InventoryTbl?.ToList()?.Where(a => a.AirlineNo == AirlineNo)?.ToList();
+                foreach(var data in inventoriesData)
+                {
+                    data.isBlock = 1;
+                    _inventoryContext.Entry(data).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                   var result=  _inventoryContext.SaveChanges();
+                    if (result < 0)
+                    {
+                        res = false;
+                    }
+                }
+                if (res ==true)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public List<InventoryTbl> GetAllFlightBasedUponPlaces(string fromplace, string toplace,DateTime fromDate,DateTime toDate)
+        {
+            try
+            {
+                var res = _inventoryContext.InventoryTbl.ToList();
+                if (res != null && !string.IsNullOrWhiteSpace(fromplace) && !string.IsNullOrWhiteSpace(toplace))
+                {
+                    res = res.Where(x => x.ToPlace.ToLower() == toplace.ToLower()
+                      && x.FromPlace.ToLower() == fromplace.ToLower())?.ToList();
+                }
+                if(res != null && fromDate!=null && fromDate!=DateTime.MinValue && toDate != null && toDate!=DateTime.MinValue)
+                {
+                    res = res.Where(x => x.StartDateTime>= fromDate 
+                      && x.EndDateTime <= toDate)?.ToList();
+                }
                 if (res.Count == 0)
                     throw new Exception("No Flight exists");
                 return res;

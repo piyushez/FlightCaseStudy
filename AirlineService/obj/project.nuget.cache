@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uqBk/ti1LCjW5PxdQX/A7IpgNbkVMnCve4Tbfm6N7G075rkSEbxhZ+tCKCrX287oMQyNBlBB+exmqPsdxumo+w==",
+  "dgSpecHash": "NdRewTSsYns6P2ofWMAuWlP163CYWAFszA8gjQMisNIDwUpjnDpnyj5Z9OAtANaRdYQG4fr5sVftxEzCQOS6Gw==",
   "success": true,
-  "projectFilePath": "D:\\Training\\AirlineService\\AirlineService.csproj",
+  "projectFilePath": "D:\\Training\\FlightManagement\\AirlineService\\AirlineService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\automatonymous\\5.1.1\\automatonymous.5.1.1.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\greenpipes\\4.0.0\\greenpipes.4.0.0.nupkg.sha512",
@@ -11,6 +11,7 @@
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\masstransit.aspnetcore\\7.2.0\\masstransit.aspnetcore.7.2.0.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\masstransit.extensions.dependencyinjection\\7.2.0\\masstransit.extensions.dependencyinjection.7.2.0.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\masstransit.rabbitmq\\7.2.0\\masstransit.rabbitmq.7.2.0.nupkg.sha512",
+    "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.20\\microsoft.aspnetcore.authentication.jwtbearer.3.1.20.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

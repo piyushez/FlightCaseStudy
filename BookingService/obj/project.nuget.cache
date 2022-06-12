@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "DMq8bGKBq5ykca2ba7ipEW1C/Vse3/pweWCl7GzVWmbNIrWrje7gtrB5ht99mYSx+X6Qb6UU6qx/BCEryXJwXA==",
+  "dgSpecHash": "091TArfJ4fGFmBSfA0T9sgshnWwXiDvb3ziwjfAbvAWAljmT5+13GjSBixahEE7fVKy1/QTCfItra25UXn3n9g==",
   "success": true,
-  "projectFilePath": "D:\\Training\\BookingService\\BookingService.csproj",
+  "projectFilePath": "D:\\Training\\FlightManagement\\BookingService\\BookingService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.25\\microsoft.aspnetcore.authentication.jwtbearer.3.1.25.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\cogdotnet45\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",

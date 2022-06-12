@@ -1,53 +1,175 @@
-﻿using LoginService.Models;
+﻿
+using LoginService.Models;
 using LoginService.Repository;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace LoginService.Controller
 {
+
     public class LoginController : ControllerBase
     {
-        private IUserDetailRepository _userDetailRepository;
-        public LoginController(IUserDetailRepository userDetailRepository)
+        //private IUserDetailRepository _userDetailRepository;
+        //public LoginController(IUserDetailRepository userDetailRepository)
+        //{
+        //    _userDetailRepository = userDetailRepository;
+        //}
+
+        //[HttpGet]
+        //[Route("Login/test")]
+        //public string testMethod()
+        //{
+        //    return "Hello!";
+        //}
+        //[HttpPost]
+
+        //[Route("Login/Login")]
+        //public IActionResult Login([FromBody] UserDetail user)
+        //{
+        //    try
+        //    {
+        //        return _userDetailRepository.Login(user);
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        //[HttpPost]
+        //[Route("Login/Register")]
+        //public IActionResult Register([FromBody] UserDetail user)
+        //{
+        //    try
+        //    {
+        //        return _userDetailRepository.Register(user);
+        //    }catch(Exception ex)
+        //    {
+        //        return new JsonResult("Failed to register user");
+        //    }
+        //}
+
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IConfiguration _configuration;
+
+        public LoginController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
-            _userDetailRepository = userDetailRepository;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+            _configuration = configuration;
         }
 
-        [HttpGet]
-        [Route("Login/test")]
-        public string testMethod()
-        {
-            return "Hello!";
-        }
+        // [AllowAnonymous]
         [HttpPost]
-
-        [Route("Login/Login")]
-        public IActionResult Login([FromBody] UserDetail user)
+        [Route("login/login")]
+        public async Task<IActionResult> Login([FromBody] LoginUser model)
         {
-            try
+            var user = await userManager.FindByNameAsync(model.Username);
+            if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
             {
-                return _userDetailRepository.Login(user);
+                var userRoles = await userManager.GetRolesAsync(user);
+
+                var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
+
+                foreach (var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                }
+
+                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
+
+                var token = new JwtSecurityToken(
+                    issuer: _configuration["JWT:ValidIssuer"],
+                    audience: _configuration["JWT:ValidAudience"],
+                    expires: DateTime.Now.AddHours(3),
+                    claims: authClaims,
+                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                    );
+
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    expiration = token.ValidTo
+                });
             }
-            catch(Exception ex)
-            {
-                throw;
-            }
+            return Unauthorized();
         }
 
         [HttpPost]
-        [Route("Login/Register")]
-        public IActionResult Register([FromBody] UserDetail user)
+        [Route("login/register")]
+        public async Task<IActionResult> Register([FromBody] RegisterUser model)
         {
-            try
+            
+            var userExists = await userManager.FindByNameAsync(model.Username);
+            if (userExists != null)
             {
-                return _userDetailRepository.Register(user);
-            }catch(Exception ex)
-            {
-                return new JsonResult("Failed to register user");
+                throw new Exception("User already exists!");
             }
+            // return new JsonResult(new { Status = "Error", Message = "User already exists!" });
+
+            ApplicationUser user = new ApplicationUser()
+            {
+                Email = model.Email,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = model.Username
+            };
+            var result = await userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+                throw new Exception("User creation failed! Please check user details and try again.");
+            // return new JsonResult(new { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+
+            return Ok(new { Status = "Success", Message = "User created successfully!", StatusCode = StatusCodes.Status200OK.ToString() });
+
+        }
+
+
+        [HttpPost]
+        [Route("login/register-admin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterUser model)
+        {
+            var userExists = await userManager.FindByNameAsync(model.Username);
+            if (userExists != null)
+
+                return new JsonResult(new { Status = "Error", Message = "User already exists." });
+
+            ApplicationUser user = new ApplicationUser()
+            {
+                Email = model.Email,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = model.Username
+            };
+            var result = await userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+                return new JsonResult(new { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+
+            if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+            if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+            if (await roleManager.RoleExistsAsync(UserRoles.Admin))
+            {
+                await userManager.AddToRoleAsync(user, UserRoles.Admin);
+            }
+
+            return new JsonResult(new { Status = "Success", Message = "User created successfully!" });
         }
     }
 }
+

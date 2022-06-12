@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Training\\AirlineService\\AirlineService.csproj": {}
+    "D:\\Training\\FlightManagement\\AirlineService\\AirlineService.csproj": {}
   },
   "projects": {
-    "D:\\Training\\AirlineService\\AirlineService.csproj": {
+    "D:\\Training\\FlightManagement\\AirlineService\\AirlineService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Training\\AirlineService\\AirlineService.csproj",
+        "projectUniqueName": "D:\\Training\\FlightManagement\\AirlineService\\AirlineService.csproj",
         "projectName": "AirlineService",
-        "projectPath": "D:\\Training\\AirlineService\\AirlineService.csproj",
+        "projectPath": "D:\\Training\\FlightManagement\\AirlineService\\AirlineService.csproj",
         "packagesPath": "C:\\Users\\cogdotnet45\\.nuget\\packages\\",
-        "outputPath": "D:\\Training\\AirlineService\\obj\\",
+        "outputPath": "D:\\Training\\FlightManagement\\AirlineService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -57,6 +57,10 @@
             "MassTransit.RabbitMQ": {
               "target": "Package",
               "version": "[7.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.20, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",

@@ -12,9 +12,11 @@ namespace AirlineService.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string AirlineNo { get; set; }
         public string UploadLogo { get; set; }
-        public string ContactNumber { get; set; }
+        public int ContactNumber { get; set; }
         public string ContactAddress { get; set; }
 
-        public virtual ICollection<InventoryTbl> Inventories { get; set; }
+        public bool isBlock { get; set; } = false;
+
+        //public virtual ICollection<InventoryTbl> Inventories { get; set; }
     }
 }

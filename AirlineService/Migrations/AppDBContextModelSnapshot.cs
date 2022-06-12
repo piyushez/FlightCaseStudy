@@ -26,11 +26,14 @@ namespace AirlineService.Migrations
                     b.Property<string>("ContactAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContactNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ContactNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("UploadLogo")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isBlock")
+                        .HasColumnType("bit");
 
                     b.HasKey("AirlineNo");
 

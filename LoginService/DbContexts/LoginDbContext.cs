@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace LoginService.DbContexts
 {
-    public class LoginDbContext:DbContext
+    public class LoginDbContext//:DbContext
     {
-        public LoginDbContext(DbContextOptions<LoginDbContext> options):base(options)
-        {
+        //public LoginDbContext(DbContextOptions<LoginDbContext> options):base(options)
+        //{
 
-        }
+        //}
 
-        public DbSet<UserDetail> Userdetail { get; set; }
+        //public DbSet<UserDetail> Userdetail { get; set; }
     }
 }

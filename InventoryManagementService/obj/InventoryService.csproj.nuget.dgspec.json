@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Training\\InventoryManagementService\\InventoryService.csproj": {}
+    "D:\\Training\\FlightManagement\\InventoryManagementService\\InventoryService.csproj": {}
   },
   "projects": {
-    "D:\\Training\\InventoryManagementService\\InventoryService.csproj": {
+    "D:\\Training\\FlightManagement\\InventoryManagementService\\InventoryService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Training\\InventoryManagementService\\InventoryService.csproj",
+        "projectUniqueName": "D:\\Training\\FlightManagement\\InventoryManagementService\\InventoryService.csproj",
         "projectName": "InventoryService",
-        "projectPath": "D:\\Training\\InventoryManagementService\\InventoryService.csproj",
+        "projectPath": "D:\\Training\\FlightManagement\\InventoryManagementService\\InventoryService.csproj",
         "packagesPath": "C:\\Users\\cogdotnet45\\.nuget\\packages\\",
-        "outputPath": "D:\\Training\\InventoryManagementService\\obj\\",
+        "outputPath": "D:\\Training\\FlightManagement\\InventoryManagementService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -57,6 +57,10 @@
             "MassTransit.RabbitMQ": {
               "target": "Package",
               "version": "[7.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.25, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",

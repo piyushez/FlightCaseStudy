@@ -1,5 +1,6 @@
 ﻿
 using InventoryService.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace InventoryService.Repository
     {
          int AddInventory(InventoryTbl inventory);
          List<InventoryTbl> GetInventory();
-         List<InventoryTbl> GetAllFlightBasedUponPlaces(string fromplace, string toplace);
+        int DeleteInventory(string AirlineNo);
+        List<InventoryTbl> GetAllFlightBasedUponPlaces(string fromplace, string toplace, DateTime fromDate, DateTime toDate);
     }
 }

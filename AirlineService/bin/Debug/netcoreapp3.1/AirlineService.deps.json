@@ -34,6 +34,7 @@
           "MassTransit": "7.2.0",
           "MassTransit.AspNetCore": "7.2.0",
           "MassTransit.RabbitMQ": "7.2.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.20",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.17",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.17",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
@@ -418,6 +419,20 @@
         },
         "compile": {
           "lib/netstandard2.0/MassTransit.RabbitMqTransport.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.20": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "5.6.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "assemblyVersion": "3.1.20.0",
+            "fileVersion": "3.100.2021.47242"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {}
         }
       },
       "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
@@ -3532,6 +3547,13 @@
       "sha512": "sha512-XfecFMB1ry9JGRloyCWR/p9wrVSzW0b+9jQCg87kuzaxdsS0R80uJ5RrYhEmrJnGgqFgQF99V7hh+sdQEKlclA==",
       "path": "masstransit.rabbitmq/7.2.0",
       "hashPath": "masstransit.rabbitmq.7.2.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fec08fgXSPp/F2nKxDZ00jN22fT86DlYExq3pH/fARjnEJZlhlFLxTWJd/pJr/8tdqVIPcxfLdIg628/DJznuA==",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/3.1.20",
+      "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.3.1.20.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",

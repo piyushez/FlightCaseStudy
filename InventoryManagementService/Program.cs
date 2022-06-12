@@ -16,27 +16,28 @@ namespace InventoryManagementService
     {
         public static void Main(string[] args)
         {
-
+            CreateHostBuilder(args).Build().Run();
             //var bus = Bus.Factory.CreateUsingRabbitMq(cfg =>
             //{
-            //    cfg.Host(new Uri("rabbitmq://localhost"), h =>
+            //    cfg.Host(new Uri("rabbitmq://localhost/todoQueue1"), h =>
             //    {
             //        h.Username("guest");
             //        h.Password("guest");
             //    });
-            //    cfg.ReceiveEndpoint("todoQueue", ep =>
+            //    cfg.ReceiveEndpoint("todoQueue1", ep =>
             //    {
             //        ep.PrefetchCount = 16;
             //        ep.UseMessageRetry(r => r.Interval(2, 100));
-            //        ep.Consumer<InventoryRepository>();
+            //        ep.Consumer<InventoryConsumer>();
             //    });
 
             //});
 
             //bus.StartAsync();
 
-           
-            CreateHostBuilder(args).Build().Run();
+
+
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InventoryService.Migrations
 {
-    public partial class InventoryServiceV1 : Migration
+    public partial class InventoryMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,7 +23,8 @@ namespace InventoryService.Migrations
                     NonBusinessClassSeat = table.Column<int>(type: "int", nullable: true),
                     TicketCost = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     NoOfRows = table.Column<int>(type: "int", nullable: true),
-                    Meal = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Meal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isBlock = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

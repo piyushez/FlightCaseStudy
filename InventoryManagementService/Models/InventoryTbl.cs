@@ -30,6 +30,7 @@ namespace InventoryService.Models
         public int? NoOfRows { get; set; }
         public string Meal { get; set; }
 
+        public int isBlock { get; set; }
     }
 
    

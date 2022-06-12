@@ -19,7 +19,7 @@ namespace InventoryService.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Common.Models.InventoryTbl", b =>
+            modelBuilder.Entity("InventoryService.Models.InventoryTbl", b =>
                 {
                     b.Property<string>("FlightNumber")
                         .HasColumnType("nvarchar(450)");
@@ -59,6 +59,9 @@ namespace InventoryService.Migrations
 
                     b.Property<string>("ToPlace")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("isBlock")
+                        .HasColumnType("int");
 
                     b.HasKey("FlightNumber");
 

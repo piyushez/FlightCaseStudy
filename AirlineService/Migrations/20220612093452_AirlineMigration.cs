@@ -2,7 +2,7 @@
 
 namespace AirlineService.Migrations
 {
-    public partial class AirlineMigrationV_1 : Migration
+    public partial class AirlineMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,8 +12,9 @@ namespace AirlineService.Migrations
                 {
                     AirlineNo = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UploadLogo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContactAddress = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ContactNumber = table.Column<int>(type: "int", nullable: false),
+                    ContactAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isBlock = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,6 +1,5 @@
 ﻿using AirlineService.Models;
 using AirlineService.Repository;
-using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,25 +13,12 @@ namespace AirlineService.Controllers
     public class AirlineController : Controller
     {
         private IAirlineRepository _airlineRepository;
-        private readonly IBus _bus;
-        public AirlineController(IAirlineRepository airlineRepository,IBus bus)
+
+        public AirlineController(IAirlineRepository airlineRepository)
         {
             _airlineRepository = airlineRepository;
-            _bus = bus;
         }
-        [HttpPost]
-        [Route("/airline/inventory")]
-        public async Task<IActionResult> CreateTicket([FromBody] Airline airline)
-        {
-            if (airline !=null)
-            {
-                Uri uri = new Uri("rabbitmq://localhost/todoQueue1");
-                var endPoint = await _bus.GetSendEndpoint(uri);
-                await endPoint.Send(airline);
-                return Ok();
-            }
-            return BadRequest();
-        }
+
         [HttpGet]
         [Route("/airline/getairlines")]
         public  IActionResult GetAirlines()
@@ -57,29 +43,8 @@ namespace AirlineService.Controllers
             }
         }
 
-        //[HttpGet]
-        //[Route("/airline/GetInventories")]
-        //public IActionResult GetInventories()
-        //{
-        //    //List<Airline> lstAirline = new List<Airline>();
-        //    try
-        //    {
-
-        //        /*var lstAirline = */_airlineRepository.GetInventories();
-        //        //if (lstAirline != null)
-        //        //{
-        //        //    return Json(new { data = lstAirline, isSuccess = true });
-        //        //}
-        //        //else
-        //        //{
-        //            return Json(new { data = "No Details Found", isSuccess = true });
-        //        //}
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(new { data = ex.Message, isSuccess = false });
-        //    }
-        //}
+       
+       
         [HttpGet]
         [Route("/airline/GetAirlineByNo/{airlineNo}")]
         public IActionResult GetAirlineByNo(string airlineNo)
@@ -156,10 +121,11 @@ namespace AirlineService.Controllers
         {
             try
             {
-                int res = _airlineRepository.DeleteAirlineByNo(airlineNo);
+                int res =  _airlineRepository.DeleteAirlineByNo(airlineNo);
 
                 if (res > -1)
                 {
+                    
                     return Json(new { data = "Successfully Deleted", isSuccess = true });
                 }
                 else
